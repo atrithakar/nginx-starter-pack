@@ -5,7 +5,7 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/conf.d/path-based-routing.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app1
       - app2
@@ -17,29 +17,29 @@ services:
       context: ./servers
       dockerfile: Dockerfiles/Dockerfile.server1
     image: server-1:latest
-    expose:
-      - "3001"
+    ports:
+      - "3001:3000"
 
   app2:
     build:
       context: ./servers
       dockerfile: Dockerfiles/Dockerfile.server2
     image: server-2:latest
-    expose:
-      - "3002"
+    ports:
+      - "3002:3000"
 
   app3:
     build:
       context: ./servers
       dockerfile: Dockerfiles/Dockerfile.server3
     image: server-3:latest
-    expose:
-      - "3003"
+    ports:
+      - "3003:3000"
 
   app4:
     build:
       context: ./servers
       dockerfile: Dockerfiles/Dockerfile.server4
     image: server-4:latest
-    expose:
-      - "3004"
+    ports:
+      - "3004:3000"
