@@ -1,0 +1,45 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: learn-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - app1
+      - app2
+      - app3
+      - app4
+
+  app1:
+    build:
+      context: ./servers
+      dockerfile: Dockerfiles/Dockerfile.server1
+    image: server-1:latest
+    expose:
+      - "3001"
+
+  app2:
+    build:
+      context: ./servers
+      dockerfile: Dockerfiles/Dockerfile.server2
+    image: server-2:latest
+    expose:
+      - "3002"
+
+  app3:
+    build:
+      context: ./servers
+      dockerfile: Dockerfiles/Dockerfile.server3
+    image: server-3:latest
+    expose:
+      - "3003"
+
+  app4:
+    build:
+      context: ./servers
+      dockerfile: Dockerfiles/Dockerfile.server4
+    image: server-4:latest
+    expose:
+      - "3004"
