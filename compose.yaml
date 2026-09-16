@@ -13,33 +13,29 @@ services:
       - app4
 
   app1:
-    build:
-      context: ./servers
-      dockerfile: Dockerfiles/Dockerfile.server1
-    image: server-1:latest
+    build: .
+    environment:
+      - SERVER_NO=1
     ports:
       - "3001:3000"
 
   app2:
-    build:
-      context: ./servers
-      dockerfile: Dockerfiles/Dockerfile.server2
-    image: server-2:latest
+    build: .
+    environment:
+      - SERVER_NO=2
     ports:
       - "3002:3000"
 
   app3:
-    build:
-      context: ./servers
-      dockerfile: Dockerfiles/Dockerfile.server3
-    image: server-3:latest
+    build: .
+    environment:
+      - SERVER_NO=3
     ports:
       - "3003:3000"
 
   app4:
-    build:
-      context: ./servers
-      dockerfile: Dockerfiles/Dockerfile.server4
-    image: server-4:latest
+    build: .
+    environment:
+      - SERVER_NO=4
     ports:
       - "3004:3000"
