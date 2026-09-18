@@ -1,16 +1,15 @@
 services:
   nginx:
     image: nginx:latest
-    container_name: learn-nginx
+    container_name: experiment-nginx
     ports:
       - "8000:80"
     volumes:
-      - ./nginx/conf.d/CONF_FILE:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/conf.d/load-balancer.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app1
-      - app2
-      - app3
-      - app4
+    networks:
+      - app-net
 
   app1:
     build: .
@@ -18,24 +17,9 @@ services:
       - SERVER_NO=1
     ports:
       - "3001:3000"
+    networks:
+      - app-net
 
-  app2:
-    build: .
-    environment:
-      - SERVER_NO=2
-    ports:
-      - "3002:3000"
-
-  app3:
-    build: .
-    environment:
-      - SERVER_NO=3
-    ports:
-      - "3003:3000"
-
-  app4:
-    build: .
-    environment:
-      - SERVER_NO=4
-    ports:
-      - "3004:3000"
+networks:
+  app-net:
+    driver: bridge
