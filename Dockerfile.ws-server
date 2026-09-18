@@ -1,0 +1,9 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+COPY ws-server.js /app/
+
+EXPOSE 3000
+
+CMD ["node", "ws-server.js"]
